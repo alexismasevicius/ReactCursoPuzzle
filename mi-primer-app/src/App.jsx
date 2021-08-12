@@ -1,11 +1,30 @@
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./App.css";
+import HomeContainer from "./containers/HomeContainer";
 
 import ProductsContainer from "./containers/ProductsContainer";
+import { EcommerceProvider } from "./context/EcommerceContext";
 
 const App = () => {
   return (
     <div className="App">
-      <ProductsContainer />
+      <BrowserRouter>
+        <EcommerceProvider>
+          <Switch>
+            <Route exact path="/">
+              <HomeContainer />
+            </Route>
+
+            <Route exact path="/productos">
+              <ProductsContainer />
+            </Route>
+
+            <Route exact path="/productos/:busqueda">
+              <ProductsContainer />
+            </Route>
+          </Switch>
+        </EcommerceProvider>
+      </BrowserRouter>
     </div>
   );
 };
